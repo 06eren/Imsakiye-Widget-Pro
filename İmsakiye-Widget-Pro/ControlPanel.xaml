@@ -233,7 +233,8 @@
                                         OnContent="Açık" 
                                         OffContent="Kapalı"
                                         Margin="0,0,0,15"
-                                        FontSize="14"/>
+                                        FontSize="14"
+                                        Toggled="AutoStart_Toggled"/>
 
                         <mah:ToggleSwitch x:Name="NotificationsToggle" 
                                         Header="🔔 Vakit Bildirimleri" 
@@ -241,7 +242,100 @@
                                         OnContent="Açık" 
                                         OffContent="Kapalı"
                                         Margin="0,0,0,20"
-                                        FontSize="14"/>
+                                        FontSize="14"
+                                        Toggled="Notifications_Toggled"/>
+
+                        <Border Background="#1e272e" 
+                                CornerRadius="8" 
+                                Padding="15" 
+                                BorderBrush="#00b894" 
+                                BorderThickness="1"
+                                Margin="0,0,0,15">
+                            <StackPanel>
+                                <TextBlock Text="⏰ Vakit Öncesi Hatırlatıcı (Dakika)" 
+                                          FontSize="14" 
+                                          Foreground="White" 
+                                          Margin="0,0,0,10"/>
+                                <Slider x:Name="ReminderSlider" 
+                                       Minimum="0" 
+                                       Maximum="30" 
+                                       Value="10" 
+                                       TickFrequency="5"
+                                       IsSnapToTickEnabled="True"
+                                       ValueChanged="ReminderSlider_ValueChanged"
+                                       Foreground="{StaticResource AccentGradient}"/>
+                                <TextBlock x:Name="ReminderValueText" 
+                                          Text="10 dakika önce" 
+                                          FontSize="16" 
+                                          FontWeight="Bold"
+                                          Foreground="#00b894" 
+                                          HorizontalAlignment="Right"
+                                          Margin="0,5,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Background="#1e272e" 
+                                CornerRadius="8" 
+                                Padding="15" 
+                                BorderBrush="#00b894" 
+                                BorderThickness="1"
+                                Margin="0,0,0,15">
+                            <StackPanel>
+                                <TextBlock Text="🎨 Tema Seçimi" 
+                                          FontSize="14" 
+                                          Foreground="White" 
+                                          Margin="0,0,0,10"/>
+                                <ComboBox x:Name="ThemeComboBox" 
+                                         FontSize="14"
+                                         SelectionChanged="ThemeComboBox_SelectionChanged">
+                                    <ComboBoxItem Content="Koyu Tema" IsSelected="True"/>
+                                    <ComboBoxItem Content="Açık Tema"/>
+                                    <ComboBoxItem Content="Renkli Tema"/>
+                                </ComboBox>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Background="#1e272e" 
+                                CornerRadius="8" 
+                                Padding="15" 
+                                BorderBrush="#00b894" 
+                                BorderThickness="1"
+                                Margin="0,0,0,15">
+                            <StackPanel>
+                                <TextBlock Text="🔊 Ezan Sesi" 
+                                          FontSize="14" 
+                                          Foreground="White" 
+                                          Margin="0,0,0,10"/>
+                                <ComboBox x:Name="AdhanSoundComboBox" 
+                                         FontSize="14"
+                                         SelectionChanged="AdhanSoundComboBox_SelectionChanged">
+                                    <ComboBoxItem Content="Akşam Ezanı" IsSelected="True"/>
+                                    <ComboBoxItem Content="Sabah Ezanı"/>
+                                    <ComboBoxItem Content="Sessiz"/>
+                                </ComboBox>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Background="#1e272e" 
+                                CornerRadius="8" 
+                                Padding="15" 
+                                BorderBrush="#00b894" 
+                                BorderThickness="1"
+                                Margin="0,0,0,15">
+                            <StackPanel>
+                                <TextBlock Text="📏 Widget Boyutu" 
+                                          FontSize="14" 
+                                          Foreground="White" 
+                                          Margin="0,0,0,10"/>
+                                <ComboBox x:Name="WidgetSizeComboBox" 
+                                         FontSize="14"
+                                         SelectionChanged="WidgetSizeComboBox_SelectionChanged">
+                                    <ComboBoxItem Content="Küçük"/>
+                                    <ComboBoxItem Content="Normal" IsSelected="True"/>
+                                    <ComboBoxItem Content="Büyük"/>
+                                </ComboBox>
+                            </StackPanel>
+                        </Border>
 
                         <Border Background="#1e272e" 
                                 CornerRadius="8" 

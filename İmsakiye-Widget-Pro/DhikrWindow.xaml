@@ -1,0 +1,22 @@
+<Window x:Class="İmsakiye_Widget_Pro.DhikrWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Zikir Listesi" Height="600" Width="700"
+        WindowStartupLocation="CenterScreen"
+        Background="#1e272e">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Border Grid.Row="0" Background="#0984e3" Padding="15">
+            <TextBlock Text="🌟 ZİKİR LİSTESİ" FontSize="24" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+        </Border>
+        
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="20" x:Name="DhikrPanel"/>
+        </ScrollViewer>
+    </Grid>
+</Window>

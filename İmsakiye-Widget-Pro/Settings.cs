@@ -11,6 +11,15 @@ namespace İmsakiye_Widget_Pro
         public bool AlwaysOnTop { get; set; } = true;
         public bool AutoStart { get; set; } = false;
         public double Opacity { get; set; } = 0.95;
+        public string Theme { get; set; } = "Dark";
+        public string Language { get; set; } = "Türkçe";
+        public string AdhanSound { get; set; } = "AksamEzani.mp3";
+        public int ReminderMinutes { get; set; } = 10;
+        public bool ShowWeather { get; set; } = true;
+        public string WidgetSize { get; set; } = "Normal";
+        public double WidgetX { get; set; } = 100;
+        public double WidgetY { get; set; } = 100;
+        public string AIApiKey { get; set; } = "AIzaSyAG0dhn_Qqz8ix7F6BLvT9z3E4eL0CAiPY";
 
         private static string SettingsPath => Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),

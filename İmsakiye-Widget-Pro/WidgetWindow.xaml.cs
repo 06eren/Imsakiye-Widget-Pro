@@ -24,6 +24,55 @@ namespace İmsakiye_Widget_Pro
             cityName = city;
             CityNameText.Text = $"🕌 {city.ToUpper()} İMSAKİYE";
             InitializeTimer();
+            InitializeKeyboardShortcuts();
+            LoadPosition();
+            LocationChanged += (s, e) => SavePosition();
+        }
+
+        private void LoadPosition()
+        {
+            var settings = AppSettings.Load();
+            if (settings.WidgetX > 0 && settings.WidgetY > 0)
+            {
+                Left = settings.WidgetX;
+                Top = settings.WidgetY;
+            }
+        }
+
+        private void SavePosition()
+        {
+            var settings = AppSettings.Load();
+            settings.WidgetX = Left;
+            settings.WidgetY = Top;
+            settings.Save();
+        }
+
+        private void InitializeKeyboardShortcuts()
+        {
+            // Klavye kısayolları
+            KeyDown += (s, e) =>
+            {
+                if (e.Key == System.Windows.Input.Key.M && System.Windows.Input.Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
+                {
+                    // Ctrl+M: Menü
+                    MenuButton_Click(this, new RoutedEventArgs());
+                }
+                else if (e.Key == System.Windows.Input.Key.S && System.Windows.Input.Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
+                {
+                    // Ctrl+S: Ayarlar
+                    SettingsButton_Click(this, new RoutedEventArgs());
+                }
+                else if (e.Key == System.Windows.Input.Key.H && System.Windows.Input.Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
+                {
+                    // Ctrl+H: Gizle
+                    MinimizeButton_Click(this, new RoutedEventArgs());
+                }
+                else if (e.Key == System.Windows.Input.Key.Q && System.Windows.Input.Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
+                {
+                    // Ctrl+Q: Kapat
+                    CloseButton_Click(this, new RoutedEventArgs());
+                }
+            };
         }
 
         private void InitializeTimer()
@@ -156,6 +205,36 @@ namespace İmsakiye_Widget_Pro
 
             // Ezan vakti kontrolü - Vakit geldiğinde ezan çal
             CheckAndPlayAdhan(now);
+            
+            // Vakit öncesi hatırlatıcı
+            CheckPrayerReminder(nextPrayer.Key, timeUntil);
+        }
+
+        private void CheckPrayerReminder(string prayerName, TimeSpan timeUntil)
+        {
+            var settings = AppSettings.Load();
+            if (!settings.NotificationsEnabled || settings.ReminderMinutes == 0) return;
+
+            var reminderTime = TimeSpan.FromMinutes(settings.ReminderMinutes);
+            var timeDiff = Math.Abs((timeUntil - reminderTime).TotalSeconds);
+
+            // Hatırlatıcı zamanı geldi mi (30 saniye tolerans)
+            if (timeDiff < 30 && !playedPrayers.Contains($"reminder_{prayerName}"))
+            {
+                playedPrayers.Add($"reminder_{prayerName}");
+                ShowReminderNotification(prayerName, settings.ReminderMinutes);
+            }
+        }
+
+        private void ShowReminderNotification(string prayerName, int minutes)
+        {
+            var settings = AppSettings.Load();
+            if (!settings.NotificationsEnabled) return;
+            
+            // Sadece pencereyi öne getir, popup gösterme
+            Show();
+            WindowState = WindowState.Normal;
+            Activate();
         }
 
         private void CheckAndPlayAdhan(TimeSpan currentTime)
@@ -220,23 +299,25 @@ namespace İmsakiye_Widget_Pro
 
         private void ShowPrayerNotification(string prayerName)
         {
+            var settings = AppSettings.Load();
+            if (!settings.NotificationsEnabled) return;
+
             // Pencereyi öne getir ve göster
             Show();
             WindowState = WindowState.Normal;
             Topmost = true;
             Activate();
-
-            // Bildirim mesajı
-            System.Windows.MessageBox.Show(
-                $"{prayerName} vakti girdi!\n\nEzan okunuyor...",
-                "🕌 Namaz Vakti",
-                MessageBoxButton.OK,
-                MessageBoxImage.Information);
         }
 
         private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             DragMove();
+        }
+
+        private void MenuButton_Click(object sender, RoutedEventArgs e)
+        {
+            var menuWindow = new MenuWindow();
+            menuWindow.ShowDialog();
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)

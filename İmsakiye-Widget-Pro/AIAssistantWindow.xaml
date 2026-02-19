@@ -1,0 +1,45 @@
+<Window x:Class="İmsakiye_Widget_Pro.AIAssistantWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AI Asistan" Height="700" Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#1e272e">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <Border Grid.Row="0" Background="#a29bfe" Padding="15">
+            <TextBlock Text="🤖 AI ASİSTAN" FontSize="24" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+        </Border>
+        
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
+            <Button Content="⏰ Akıllı Hatırlatıcı" Click="SmartReminder_Click" Background="#00b894" Foreground="White" BorderThickness="0" Padding="15,10" Margin="5" FontSize="12" FontWeight="Bold"/>
+            <Button Content="💡 Kişisel Öneriler" Click="PersonalSuggestions_Click" Background="#0984e3" Foreground="White" BorderThickness="0" Padding="15,10" Margin="5" FontSize="12" FontWeight="Bold"/>
+            <Button Content="🎤 Sesli Asistan" Click="VoiceAssistant_Click" Background="#fdcb6e" Foreground="White" BorderThickness="0" Padding="15,10" Margin="5" FontSize="12" FontWeight="Bold"/>
+            <Button Content="📅 Otomatik Planlama" Click="AutoPlanning_Click" Background="#6c5ce7" Foreground="White" BorderThickness="0" Padding="15,10" Margin="5" FontSize="12" FontWeight="Bold"/>
+        </StackPanel>
+        
+        <Border Grid.Row="2" Background="#2d3436" CornerRadius="15" Margin="30,0,30,20" Padding="20">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <TextBlock x:Name="ResponseText" Text="" FontSize="16" Foreground="#dfe6e9" TextWrapping="Wrap" LineHeight="24"/>
+            </ScrollViewer>
+        </Border>
+        
+        <Grid Grid.Row="3" Margin="30,0,30,30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBox x:Name="UserInput" Grid.Column="0" FontSize="16" Padding="15" Margin="0,0,10,0" 
+                     Background="#2d3436" Foreground="White" BorderBrush="#a29bfe" BorderThickness="2"/>
+            <Button x:Name="SendButton" Grid.Column="1" Content="Gönder" Click="Send_Click" 
+                    Background="#a29bfe" Foreground="White" BorderThickness="0" Padding="30,15" FontSize="16" FontWeight="Bold"/>
+        </Grid>
+    </Grid>
+</Window>

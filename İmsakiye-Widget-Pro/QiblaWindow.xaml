@@ -1,0 +1,46 @@
+<Window x:Class="İmsakiye_Widget_Pro.QiblaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Kıble Yönü" Height="500" Width="500"
+        WindowStartupLocation="CenterScreen"
+        Background="#1e272e">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <Border Grid.Row="0" Background="#00b894" Padding="15">
+            <TextBlock Text="🧭 KIBLE YÖNÜ" FontSize="24" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+        </Border>
+        
+        <Canvas Grid.Row="1" x:Name="CompassCanvas" Width="350" Height="350">
+            <!-- Pusula Dairesi -->
+            <Ellipse Width="350" Height="350" Stroke="#00b894" StrokeThickness="5" Fill="#2d3436"/>
+            
+            <!-- Kıble Ok -->
+            <Path x:Name="QiblaArrow" Fill="#00b894" Data="M 175,50 L 185,175 L 175,160 L 165,175 Z">
+                <Path.RenderTransform>
+                    <RotateTransform x:Name="QiblaRotation" CenterX="175" CenterY="175" Angle="0"/>
+                </Path.RenderTransform>
+            </Path>
+            
+            <!-- Merkez Nokta -->
+            <Ellipse Width="20" Height="20" Canvas.Left="165" Canvas.Top="165" Fill="White"/>
+            
+            <!-- Yön İşaretleri -->
+            <TextBlock Text="K" FontSize="24" FontWeight="Bold" Foreground="White" Canvas.Left="165" Canvas.Top="10"/>
+            <TextBlock Text="G" FontSize="24" FontWeight="Bold" Foreground="White" Canvas.Left="320" Canvas.Top="165"/>
+            <TextBlock Text="D" FontSize="24" FontWeight="Bold" Foreground="White" Canvas.Left="165" Canvas.Top="320"/>
+            <TextBlock Text="B" FontSize="24" FontWeight="Bold" Foreground="White" Canvas.Left="10" Canvas.Top="165"/>
+        </Canvas>
+        
+        <StackPanel Grid.Row="2" Margin="20">
+            <TextBlock x:Name="QiblaAngleText" Text="Kıble Açısı: Hesaplanıyor..." FontSize="16" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+            <TextBlock x:Name="LocationText" Text="Konum: Ankara" FontSize="14" Foreground="#b2bec3" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+            <Button Content="Kapat" Click="Close_Click" Background="#d63031" Foreground="White" BorderThickness="0" Padding="20,10" FontSize="14" HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,59 @@
+<Window x:Class="İmsakiye_Widget_Pro.RamadanSpecialWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Ramazan Özel" Height="650" Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#1e272e">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Border Grid.Row="0" Background="#55efc4" Padding="15">
+            <TextBlock Text="🌙 RAMAZAN ÖZEL" FontSize="24" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+        </Border>
+        
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="30">
+                <!-- İftar Geri Sayım -->
+                <Border Background="#2d3436" CornerRadius="15" Padding="25" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Text="🍽️ İftar Geri Sayım" FontSize="20" FontWeight="Bold" Foreground="#55efc4" Margin="0,0,0,15"/>
+                        <TextBlock x:Name="IftarCountdown" Text="İftara Kalan: 5 saat 23 dakika" FontSize="24" FontWeight="Bold" Foreground="#fdcb6e" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Sahur Alarmı -->
+                <Border Background="#2d3436" CornerRadius="15" Padding="25" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Text="⏰ Sahur Alarmı" FontSize="20" FontWeight="Bold" Foreground="#0984e3" Margin="0,0,0,15"/>
+                        <TextBlock Text="Sahur Vakti: 04:30" FontSize="18" Foreground="#dfe6e9" Margin="0,0,0,10"/>
+                        <Button Content="Alarm Kur" Click="SetSahurAlarm_Click" Background="#0984e3" Foreground="White" BorderThickness="0" Padding="20,10" FontSize="14" FontWeight="Bold"/>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Teravih Takibi -->
+                <Border Background="#2d3436" CornerRadius="15" Padding="25" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Text="🕌 Teravih Takibi" FontSize="20" FontWeight="Bold" Foreground="#6c5ce7" Margin="0,0,0,15"/>
+                        <TextBlock x:Name="TarawihProgress" Text="Kılınan Teravih: 15/30" FontSize="16" Foreground="#dfe6e9" Margin="0,0,0,10"/>
+                        <ProgressBar x:Name="TarawihBar" Height="20" Value="50" Maximum="100" Foreground="#6c5ce7"/>
+                        <Button Content="Teravih Kıldım" Click="MarkTarawih_Click" Background="#6c5ce7" Foreground="White" BorderThickness="0" Padding="20,10" Margin="0,15,0,0" FontSize="14" FontWeight="Bold"/>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Mukabele Takibi -->
+                <Border Background="#2d3436" CornerRadius="15" Padding="25">
+                    <StackPanel>
+                        <TextBlock Text="📖 Mukabele Takibi" FontSize="20" FontWeight="Bold" Foreground="#00b894" Margin="0,0,0,15"/>
+                        <TextBlock x:Name="MukabeleProgress" Text="Okunan Cüz: 12/30" FontSize="16" Foreground="#dfe6e9" Margin="0,0,0,10"/>
+                        <ProgressBar x:Name="MukabeleBar" Height="20" Value="40" Maximum="100" Foreground="#00b894"/>
+                        <Button Content="Cüz Tamamlandı" Click="MarkJuz_Click" Background="#00b894" Foreground="White" BorderThickness="0" Padding="20,10" Margin="0,15,0,0" FontSize="14" FontWeight="Bold"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

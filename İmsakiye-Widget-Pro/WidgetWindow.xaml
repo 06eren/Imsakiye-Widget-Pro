@@ -121,6 +121,39 @@
                     Padding="8" 
                     Margin="0,12,0,0">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="📱" 
+                            Width="36" Height="36" 
+                            Click="MenuButton_Click" 
+                            Background="{StaticResource HeaderGradient}" 
+                            Foreground="White" 
+                            BorderThickness="0"
+                            FontSize="16" 
+                            Margin="0,0,8,0" 
+                            ToolTip="Menü"
+                            Cursor="Hand">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}" 
+                                                   CornerRadius="18" 
+                                                   BorderThickness="0">
+                                                <ContentPresenter HorizontalAlignment="Center" 
+                                                                VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.8"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    
                     <Button Content="⚙" 
                             Width="36" Height="36" 
                             Click="SettingsButton_Click" 

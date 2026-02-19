@@ -1,0 +1,89 @@
+<Window x:Class="İmsakiye_Widget_Pro.StatisticsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="İstatistikler" Height="600" Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#1e272e">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Border Grid.Row="0" Background="#a29bfe" Padding="15">
+            <TextBlock Text="📊 İSTATİSTİKLER" FontSize="24" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+        </Border>
+        
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="30">
+                <!-- Bugün -->
+                <Border Background="#2d3436" CornerRadius="15" Padding="25" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Text="📅 Bugün" FontSize="22" FontWeight="Bold" Foreground="White" Margin="0,0,0,15"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                                <TextBlock Text="Geçen Vakitler" FontSize="14" Foreground="#b2bec3" Margin="0,0,0,5"/>
+                                <TextBlock x:Name="PassedPrayersText" Text="3 / 6" FontSize="32" FontWeight="Bold" Foreground="#00b894"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                                <TextBlock Text="Kalan Vakitler" FontSize="14" Foreground="#b2bec3" Margin="0,0,0,5"/>
+                                <TextBlock x:Name="RemainingPrayersText" Text="3 / 6" FontSize="32" FontWeight="Bold" Foreground="#fdcb6e"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Bu Ay -->
+                <Border Background="#2d3436" CornerRadius="15" Padding="25" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Text="📆 Bu Ay" FontSize="22" FontWeight="Bold" Foreground="White" Margin="0,0,0,15"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                                <TextBlock Text="Geçen Günler" FontSize="14" Foreground="#b2bec3" Margin="0,0,0,5"/>
+                                <TextBlock x:Name="PassedDaysText" Text="19" FontSize="32" FontWeight="Bold" Foreground="#00cec9"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                                <TextBlock Text="Kalan Günler" FontSize="14" Foreground="#b2bec3" Margin="0,0,0,5"/>
+                                <TextBlock x:Name="RemainingDaysText" Text="9" FontSize="32" FontWeight="Bold" Foreground="#e17055"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Uygulama Kullanımı -->
+                <Border Background="#2d3436" CornerRadius="15" Padding="25" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Text="⏱️ Uygulama Kullanımı" FontSize="22" FontWeight="Bold" Foreground="White" Margin="0,0,0,15"/>
+                        <StackPanel>
+                            <TextBlock Text="İlk Kullanım" FontSize="14" Foreground="#b2bec3" Margin="0,0,0,5"/>
+                            <TextBlock x:Name="FirstUseText" Text="19 Şubat 2026" FontSize="18" Foreground="White" Margin="0,0,0,15"/>
+                            
+                            <TextBlock Text="Toplam Kullanım Süresi" FontSize="14" Foreground="#b2bec3" Margin="0,0,0,5"/>
+                            <TextBlock x:Name="TotalUsageText" Text="1 gün" FontSize="18" Foreground="White" Margin="0,0,0,15"/>
+                            
+                            <TextBlock Text="Açılış Sayısı" FontSize="14" Foreground="#b2bec3" Margin="0,0,0,5"/>
+                            <TextBlock x:Name="OpenCountText" Text="1" FontSize="18" Foreground="White"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Vakit Detayları -->
+                <Border Background="#2d3436" CornerRadius="15" Padding="25">
+                    <StackPanel>
+                        <TextBlock Text="🕌 Vakit Detayları" FontSize="22" FontWeight="Bold" Foreground="White" Margin="0,0,0,15"/>
+                        <StackPanel x:Name="PrayerDetailsPanel"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

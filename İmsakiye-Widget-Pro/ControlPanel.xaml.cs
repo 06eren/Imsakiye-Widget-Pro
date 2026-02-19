@@ -88,13 +88,11 @@ namespace İmsakiye_Widget_Pro
             if (widgetWindow != null)
             {
                 widgetWindow.UpdateCityName(selectedCity);
+                widgetWindow.UpdatePrayerTimes(prayerTimes!);
             }
             
-            System.Windows.MessageBox.Show(
-                $"{selectedCity} şehri kaydedildi ve namaz vakitleri güncellendi!",
-                "Başarılı",
-                MessageBoxButton.OK,
-                MessageBoxImage.Information);
+            // Mesaj gösterme, sadece kaydet
+            WidgetStatusText.Text = $"{selectedCity} kaydedildi - {DateTime.Now:HH:mm}";
         }
 
         private void ApplySettings()
@@ -106,7 +104,22 @@ namespace İmsakiye_Widget_Pro
             if (NotificationsToggle != null)
                 NotificationsToggle.IsOn = settings.NotificationsEnabled;
             if (OpacitySlider != null)
+            {
                 OpacitySlider.Value = settings.Opacity;
+                OpacityValueText.Text = $"{(int)(settings.Opacity * 100)}%";
+            }
+            if (ReminderSlider != null)
+            {
+                ReminderSlider.Value = settings.ReminderMinutes;
+                var minutes = settings.ReminderMinutes;
+                ReminderValueText.Text = minutes == 0 ? "Kapalı" : $"{minutes} dakika önce";
+            }
+            if (ThemeComboBox != null)
+                ThemeComboBox.SelectedIndex = settings.Theme == "Light" ? 1 : settings.Theme == "Colorful" ? 2 : 0;
+            if (AdhanSoundComboBox != null)
+                AdhanSoundComboBox.SelectedIndex = settings.AdhanSound == "SabahEzani.mp3" ? 1 : settings.AdhanSound == "Silent" ? 2 : 0;
+            if (WidgetSizeComboBox != null)
+                WidgetSizeComboBox.SelectedIndex = settings.WidgetSize == "Small" ? 0 : settings.WidgetSize == "Large" ? 2 : 1;
         }
 
         private void InitializeMidnightTimer()
@@ -289,6 +302,49 @@ namespace İmsakiye_Widget_Pro
             }
         }
 
+        private void AutoStart_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (settings != null && AutoStartToggle != null)
+            {
+                settings.AutoStart = AutoStartToggle.IsOn;
+                settings.Save();
+                
+                // Windows başlangıç kaydı
+                SetAutoStart(AutoStartToggle.IsOn);
+            }
+        }
+
+        private void SetAutoStart(bool enable)
+        {
+            try
+            {
+                var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                if (key != null)
+                {
+                    if (enable)
+                    {
+                        var exePath = System.Reflection.Assembly.GetExecutingAssembly().Location.Replace(".dll", ".exe");
+                        key.SetValue("ImsakiyeWidgetPro", exePath);
+                    }
+                    else
+                    {
+                        key.DeleteValue("ImsakiyeWidgetPro", false);
+                    }
+                    key.Close();
+                }
+            }
+            catch { }
+        }
+
+        private void Notifications_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (settings != null && NotificationsToggle != null)
+            {
+                settings.NotificationsEnabled = NotificationsToggle.IsOn;
+                settings.Save();
+            }
+        }
+
         private void OpacitySlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (OpacityValueText != null && OpacitySlider != null)
@@ -304,6 +360,76 @@ namespace İmsakiye_Widget_Pro
                 if (widgetWindow != null)
                 {
                     widgetWindow.Opacity = OpacitySlider.Value;
+                }
+            }
+        }
+
+        private void ReminderSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (ReminderValueText != null && ReminderSlider != null)
+            {
+                var minutes = (int)ReminderSlider.Value;
+                ReminderValueText.Text = minutes == 0 ? "Kapalı" : $"{minutes} dakika önce";
+            }
+            
+            if (settings != null && ReminderSlider != null)
+            {
+                settings.ReminderMinutes = (int)ReminderSlider.Value;
+                settings.Save();
+            }
+        }
+
+        private void ThemeComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (settings != null && ThemeComboBox != null)
+            {
+                settings.Theme = ThemeComboBox.SelectedIndex switch
+                {
+                    1 => "Light",
+                    2 => "Colorful",
+                    _ => "Dark"
+                };
+                settings.Save();
+                // Mesaj gösterme, sadece kaydet
+            }
+        }
+
+        private void AdhanSoundComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (settings != null && AdhanSoundComboBox != null)
+            {
+                settings.AdhanSound = AdhanSoundComboBox.SelectedIndex switch
+                {
+                    1 => "SabahEzani.mp3",
+                    2 => "Silent",
+                    _ => "AksamEzani.mp3"
+                };
+                settings.Save();
+            }
+        }
+
+        private void WidgetSizeComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (settings != null && WidgetSizeComboBox != null)
+            {
+                settings.WidgetSize = WidgetSizeComboBox.SelectedIndex switch
+                {
+                    0 => "Small",
+                    2 => "Large",
+                    _ => "Normal"
+                };
+                settings.Save();
+                
+                if (widgetWindow != null)
+                {
+                    var scale = settings.WidgetSize switch
+                    {
+                        "Small" => 0.8,
+                        "Large" => 1.2,
+                        _ => 1.0
+                    };
+                    widgetWindow.Width = 340 * scale;
+                    widgetWindow.Height = 420 * scale;
                 }
             }
         }

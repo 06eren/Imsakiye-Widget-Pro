@@ -1,0 +1,30 @@
+<Window x:Class="İmsakiye_Widget_Pro.QuranWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Kur'an-ı Kerim Sureleri" Height="700" Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="#1e272e">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Border Grid.Row="0" Background="#55efc4" Padding="15">
+            <TextBlock Text="📖 KUR'AN-I KERİM SURESİ" FontSize="24" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+        </Border>
+        
+        <Border Grid.Row="1" Background="#2d3436" Padding="15">
+            <StackPanel>
+                <TextBlock Text="🔍 Sure Ara:" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                <TextBox x:Name="SearchBox" FontSize="14" Padding="10" TextChanged="SearchBox_TextChanged"/>
+            </StackPanel>
+        </Border>
+        
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="20" x:Name="SurahPanel"/>
+        </ScrollViewer>
+    </Grid>
+</Window>

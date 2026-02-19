@@ -1,0 +1,25 @@
+<Window x:Class="İmsakiye_Widget_Pro.FastingCalendarWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Oruç Takvimi" Height="700" Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#1e272e">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Border Grid.Row="0" Background="#fd79a8" Padding="15">
+            <StackPanel>
+                <TextBlock Text="🌙 ORUÇ TAKVİMİ" FontSize="24" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+                <TextBlock Text="Nafile Oruç Günleri" FontSize="14" Foreground="White" Opacity="0.9" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+            </StackPanel>
+        </Border>
+        
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="30" x:Name="FastingPanel"/>
+        </ScrollViewer>
+    </Grid>
+</Window>

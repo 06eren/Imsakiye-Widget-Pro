@@ -1,0 +1,30 @@
+<Window x:Class="İmsakiye_Widget_Pro.HijriCalendarWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Hicri Takvim" Height="600" Width="700"
+        WindowStartupLocation="CenterScreen"
+        Background="#1e272e">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Border Grid.Row="0" Background="#fdcb6e" Padding="15">
+            <TextBlock Text="📆 HİCRİ TAKVİM" FontSize="24" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+        </Border>
+        
+        <Border Grid.Row="1" Background="#2d3436" Padding="20" Margin="30,30,30,20">
+            <StackPanel>
+                <TextBlock x:Name="HijriDateText" Text="" FontSize="28" FontWeight="Bold" Foreground="#fdcb6e" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                <TextBlock x:Name="GregorianDateText" Text="" FontSize="16" Foreground="#dfe6e9" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+        
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <StackPanel x:Name="EventsPanel" Margin="30,0,30,30"/>
+        </ScrollViewer>
+    </Grid>
+</Window>

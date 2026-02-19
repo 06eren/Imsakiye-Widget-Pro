@@ -1,0 +1,30 @@
+<Window x:Class="İmsakiye_Widget_Pro.LibraryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Kütüphane" Height="650" Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#1e272e">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Border Grid.Row="0" Background="#74b9ff" Padding="15">
+            <TextBlock Text="📚 KÜTÜPHANE" FontSize="24" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+        </Border>
+        
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
+            <Button Content="📖 Kitaplar" Click="Books_Click" Background="#00b894" Foreground="White" BorderThickness="0" Padding="20,10" Margin="5" FontSize="14" FontWeight="Bold"/>
+            <Button Content="📝 Makaleler" Click="Articles_Click" Background="#0984e3" Foreground="White" BorderThickness="0" Padding="20,10" Margin="5" FontSize="14" FontWeight="Bold"/>
+            <Button Content="🎥 Videolar" Click="Videos_Click" Background="#e17055" Foreground="White" BorderThickness="0" Padding="20,10" Margin="5" FontSize="14" FontWeight="Bold"/>
+            <Button Content="🎧 Podcast" Click="Podcasts_Click" Background="#6c5ce7" Foreground="White" BorderThickness="0" Padding="20,10" Margin="5" FontSize="14" FontWeight="Bold"/>
+        </StackPanel>
+        
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <StackPanel x:Name="ContentPanel" Margin="30"/>
+        </ScrollViewer>
+    </Grid>
+</Window>
